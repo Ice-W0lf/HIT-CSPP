@@ -1,2 +1,2 @@
-# HIT-CSPP
+# HIT-CSPDP
 HIT course Computer Science Programming Practice labs
