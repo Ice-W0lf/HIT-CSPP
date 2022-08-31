@@ -6,8 +6,8 @@ COPT	= -g
 
 
 GRARC	 = sort.a
-GRSRCS	 = swap.c selectSort.c main.c bubbleSort.c insertSort.c quickSort.c mergeSort.c
-GROBJS	 = swap.o selectSort.o main.o bubbleSort.o insertSort.o quickSort.o mergeSort.o
+GRSRCS	 = swap.c selectSort.c main.c bubbleSort.c insertSort.c quickSort.c mergeSort.c heapSort.c quickSortTest.c
+GROBJS	 = swap.o selectSort.o main.o bubbleSort.o insertSort.o quickSort.o mergeSort.o heapSort.o quickSortTest.o
 HEADER   = sort.h
 
 runsort: $(GROBJS)
@@ -27,8 +27,10 @@ quickSort.o: quickSort.c sort.h
 	$(CC) $(COPT) -c quickSort.c -o quickSort.o
 mergeSort.o: mergeSort.c sort.h
 	$(CC) $(COPT) -c mergeSort.c -o mergeSort.o
-#heapSort.o: heapSort.c sort.h
-#	$(CC) $(COPT) -c heapSort.c -o heapSort.o
+heapSort.o: heapSort.c sort.h
+	$(CC) $(COPT) -c heapSort.c -o heapSort.o
+quickSortTest.o: quickSortTest.c sort.h
+	$(CC) $(COPT) -c quickSortTest.c -o quickSortTest.o
 
 
 clean   :

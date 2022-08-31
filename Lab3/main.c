@@ -4,7 +4,7 @@
 #include <string.h>
 #include "sort.h"
 
-//#define debug
+#define __debug__		// for printing data
 //you must specify an int to indicate the data type to be sorted
 int dataType = STUDENT;
 
@@ -13,119 +13,126 @@ int dataType = STUDENT;
 int cmp(ElemType *a, ElemType *b);
 //to generate random data
 void generateData(ElemType *A, int num);
+void generateSameData(ElemType *A, double rate);
 void randName(char *name);
 void randID(char *id);
-//to output small array in debug
+//to output small array in __debug__
 void output(ElemType A[], int n, char *info);
 
 int main(int argc, char *argv[])
 {
-	if (argc < 2)
-	{
-		return 1;
-	}
-	int size;
-	size_t t1, t2;
-	sscanf(argv[1], "%d", &size);
-	if (size <= 0)
-	{
-		return 0;
-	}
-	if (argc > 2)
-	{
-		if (strcmp(argv[2], "-i") == 0)
-			dataType = INT;
-		else if (strcmp(argv[2], "-f") == 0)
-			dataType = FLOAT;
-		else if (strcmp(argv[2], "-d") == 0)
-			dataType = DOUBLE;
-		else if (strcmp(argv[2], "-s") == 0)
-			dataType = STUDENT;
-	}
-	ElemType *ori, *toSort;
-	ori = (ElemType *)malloc(sizeof(ElemType)*size);
-	toSort = (ElemType *)malloc(sizeof(ElemType)*size);
-	generateData(ori, size);
-	int (*cmpare)(ElemType *a, ElemType *b);
-	cmpare = &cmp;
-
-	// SelectSort
-	memcpy(toSort, ori, sizeof(ElemType)*size);
-#ifdef debug
-	output(toSort, size, "SelectSort: before");
-#endif
-	t1 = clock();
-	SelectSort(toSort, size, cmpare);
-	t2 = clock();
-#ifdef debug
-	output(toSort, size, "SelectSort: after");
-#endif
-	printf("SelectSort runs in %f seconds for %d objects\n\n", (t2 - t1)/(double)CLOCKS_PER_SEC, size);
-
-	// BubbleSort
-	memcpy(toSort, ori, sizeof(ElemType)*size);
-#ifdef debug
-	output(toSort, size, "BubbleSort: before");
-#endif
-	t1 = clock();
-	BubbleSort(toSort, size, cmpare);
-	t2 = clock();
-#ifdef debug
-	output(toSort, size, "BubbleSort: after");
-#endif
-	printf("BubbleSort runs in %f seconds for %d objects\n\n", (t2 - t1)/(double)CLOCKS_PER_SEC, size);
-
-	// InsertSort
-	memcpy(toSort, ori, sizeof(ElemType)*size);
-#ifdef debug
-	output(toSort, size, "InsertSort: before");
-#endif
-	t1 = clock();
-	InsertSort(toSort, size, cmpare);
-	t2 = clock();
-#ifdef debug
-	output(toSort, size, "InsertSort: after");
-#endif
-	printf("InsertSort runs in %f seconds for %d objects\n\n", (t2 - t1)/(double)CLOCKS_PER_SEC, size);
-
-	// QuickSort
-	memcpy(toSort, ori, sizeof(ElemType)*size);
-#ifdef debug
-	output(toSort, size, "QuickSort: before");
-#endif
-	t1 = clock();
-	QuickSort(toSort, 0, size-1, cmpare);
-	t2 = clock();
-#ifdef debug
-	output(toSort, size, "QuickSort: after");
-#endif
-	printf("QuickSort runs in %f seconds for %d objects\n\n", (t2 - t1)/(double)CLOCKS_PER_SEC, size);
-
-	// MergeSort
-	memcpy(toSort, ori, sizeof(ElemType)*size);
-#ifdef debug
-	output(toSort, size, "MergeSort: before");
-#endif
-	t1 = clock();
-	MergeSort(toSort, 0, size-1, cmpare);
-	t2 = clock();
-#ifdef debug
-	output(toSort, size, "MergeSort: after");
-#endif
-	printf("MergeSort runs in %f seconds for %d objects\n\n", (t2 - t1)/(double)CLOCKS_PER_SEC, size);
-
-	// HeapSort
+//	if (argc < 2)
+//	{
+//		return 1;
+//	}
+//	size_t t1, t2;
+//	int size;
+//	sscanf(argv[1], "%d", &size);
+//	if (size <= 0)
+//	{
+//		return 0;
+//	}
+//	if (argc > 2)
+//	{
+//		if (strcmp(argv[2], "-i") == 0)
+//			dataType = INT;
+//		else if (strcmp(argv[2], "-f") == 0)
+//			dataType = FLOAT;
+//		else if (strcmp(argv[2], "-d") == 0)
+//			dataType = DOUBLE;
+//		else if (strcmp(argv[2], "-s") == 0)
+//			dataType = STUDENT;
+//	}
+//	ElemType *ori, *toSort;
+//	ori = (ElemType *)malloc(sizeof(ElemType)*size);
+//	toSort = (ElemType *)malloc(sizeof(ElemType)*size);
+//	generateData(ori, size);
+//	int (*cmpare)(ElemType *a, ElemType *b);
+//	cmpare = &cmp;
+//
+//	// SelectSort
 //	memcpy(toSort, ori, sizeof(ElemType)*size);
-//#ifdef debug
+//#ifdef __debug__
+//	output(toSort, size, "SelectSort: before");
+//#endif
+//	t1 = clock();
+//	SelectSort(toSort, size, cmpare);
+//	t2 = clock();
+//#ifdef __debug__
+//	output(toSort, size, "SelectSort: after");
+//#endif
+//	printf("SelectSort runs in %f seconds for %d objects\n\n", (t2 - t1)/(double)CLOCKS_PER_SEC, size);
+//
+//	// BubbleSort
+//	memcpy(toSort, ori, sizeof(ElemType)*size);
+//#ifdef __debug__
+//	output(toSort, size, "BubbleSort: before");
+//#endif
+//	t1 = clock();
+//	BubbleSort(toSort, size, cmpare);
+//	t2 = clock();
+//#ifdef __debug__
+//	output(toSort, size, "BubbleSort: after");
+//#endif
+//	printf("BubbleSort runs in %f seconds for %d objects\n\n", (t2 - t1)/(double)CLOCKS_PER_SEC, size);
+//
+//	// InsertSort
+//	memcpy(toSort, ori, sizeof(ElemType)*size);
+//#ifdef __debug__
+//	output(toSort, size, "InsertSort: before");
+//#endif
+//	t1 = clock();
+//	InsertSort(toSort, size, cmpare);
+//	t2 = clock();
+//#ifdef __debug__
+//	output(toSort, size, "InsertSort: after");
+//#endif
+//	printf("InsertSort runs in %f seconds for %d objects\n\n", (t2 - t1)/(double)CLOCKS_PER_SEC, size);
+//
+//	//QuickSort
+//	memcpy(toSort, ori, sizeof(ElemType)*size);
+//#ifdef __debug__
+//	output(toSort, size, "QuickSort: before");
+//#endif
+//	t1 = clock();
+//	QuickSort(toSort, 0, size-1, cmpare);
+//	t2 = clock();
+//#ifdef __debug__
+//	output(toSort, size, "QuickSort: after");
+//#endif
+//	printf("QuickSort runs in %f seconds for %d objects\n\n", (t2 - t1)/(double)CLOCKS_PER_SEC, size);
+//
+//	// MergeSort
+//	memcpy(toSort, ori, sizeof(ElemType)*size);
+//#ifdef __debug__
+//	output(toSort, size, "MergeSort: before");
+//#endif
+//	t1 = clock();
+//	MergeSort(toSort, 0, size-1, cmpare);
+//	t2 = clock();
+//#ifdef __debug__
+//	output(toSort, size, "MergeSort: after");
+//#endif
+//	printf("MergeSort runs in %f seconds for %d objects\n\n", (t2 - t1)/(double)CLOCKS_PER_SEC, size);
+//
+//	// HeapSort
+//	memcpy(toSort, ori, sizeof(ElemType)*size);
+//#ifdef __debug__
 //	output(toSort, size, "HeapSort: before");
 //#endif
 //	t1 = clock();
 //	HeapSort(toSort, size, cmpare);
 //	t2 = clock();
-//#ifdef debug
+//#ifdef __debug__
 //	output(toSort, size, "HeapSort: after");
 //#endif
-//	printf("HeapSort runs in %f seconds for %d objects\n\n", (t2 - t1)/(double)CLOCKS_PER_SEC, size);
+//	printf("HeapSort runs in %f seconds for %d objects\n", (t2 - t1)/(double)CLOCKS_PER_SEC, size);
+
+	// QuickSort on different shape of data
+	dataType = DOUBLE;
+	int (*cmpare)(ElemType *a, ElemType *b);
+	cmpare = &cmp;
+	QuickSortTest(cmpare);
 
 	return 0;
 }
@@ -234,7 +241,7 @@ void randID(char *id)
 	strcpy(id, buf);
 }
 
-//to output small array in debug
+//to output small array in __debug__
 void output(ElemType A[], int n, char *info)
 {
 	printf("%s\n", info);
