@@ -14,7 +14,7 @@ void empty_stdin();
 
 // search.c
 int searchByName(Student *stu, int n, char name[MAX_STU_NAME_LEN]);
-int searchById(Student *stu, int n, unsigned long id);
+int searchById(Student *stu, int n, int64_t id);
 
 // opmain.c
 Student *input(Student *stu, int *stuNum);			// #1

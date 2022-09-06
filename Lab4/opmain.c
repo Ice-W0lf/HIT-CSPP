@@ -13,7 +13,7 @@ Student *input(Student *stu, int *stuNum)        // #1
 	{
 		printf("Student num out of range.\n");
 		printPause();
-		return NULL;
+		return stu;
 	}
 	stu = (Student *)realloc(stu, (n+*stuNum)*sizeof(Student));
 	int i = 0;
@@ -21,12 +21,12 @@ Student *input(Student *stu, int *stuNum)        // #1
 	{
 		Student *this = stu + *stuNum + i;
 		printf("Input student %d's id:", i + 1);
-		scanf("%lu", &this->id);
+		scanf("%ld", &this->id);
 		printf("Input student %d's name:", i + 1);
 		scanf("%s", this->name);
 		for (int j = 0; j < COURSE_NUM; ++j)
 		{
-			printf("Input student %d's %s score:", j + 1, courses[j]);
+			printf("Input student %d's %s score:", i + 1, courses[j]);
 			scanf("%f", &this->score[j]);
 		}
 		printf("Student %d's records successfully appended.\n", i + 1);
@@ -58,9 +58,9 @@ void queryByName(Student *stu, int n)        // #2
 
 void queryById(Student *stu, int n)            // #3
 {
-	unsigned long id;
+	int64_t id;
 	printf("Input the ID of query student:");
-	scanf("%lu", &id);
+	scanf("%ld", &id);
 	int ret = searchById(stu, n, id);
 	if (ret != -1)
 	{
@@ -76,9 +76,9 @@ void queryById(Student *stu, int n)            // #3
 
 void modify(Student *stu, int n)            // #4
 {
-	unsigned long id;
+	int64_t id;
 	printf("Input the ID of student to be modified:");
-	scanf("%lu", &id);
+	scanf("%ld", &id);
 	int ind = searchById(stu, n, id);
 	if (ind != -1)
 	{
@@ -98,9 +98,9 @@ void modify(Student *stu, int n)            // #4
 
 void delete(Student *stu, int *n)            // #5
 {
-	unsigned long id;
+	int64_t id;
 	printf("Input the ID of student to be deleted:");
-	scanf("%lu", &id);
+	scanf("%ld", &id);
 	int ind = searchById(stu, *n, id);
 	if (ind != -1)
 	{

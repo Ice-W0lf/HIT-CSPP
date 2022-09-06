@@ -1,4 +1,4 @@
-CC	   = gcc -m64 -w
+CC	   = gcc -w
 
 COPT   = -g
 

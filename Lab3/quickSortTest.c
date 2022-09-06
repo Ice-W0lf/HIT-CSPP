@@ -1,10 +1,14 @@
+#define __QuickSortTest__
+#define __QuickSort3Ways__
+//#define __debug__
+
+#ifdef __QuickSortTest__
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
 #include "sort.h"
-
-//#define __debug__
 
 enum
 {
@@ -29,7 +33,11 @@ void QuickSortTest(int (*cmp)(ElemType *, ElemType *))
 		outputDouble(toSort, SIZE, "QuickSort: before");
 #endif
 		t1 = clock();
+#ifdef __QuickSort3Ways__
 		QuickSort3Ways(toSort, 0, SIZE - 1, cmp);
+#else
+		QuickSort(toSort, 0, SIZE - 1, cmp);
+#endif
 		t2 = clock();
 #ifdef __debug__
 		outputDouble(toSort, SIZE, "QuickSort: after");
@@ -95,3 +103,4 @@ void QuickSort3Ways(ElemType *A, int low, int high, int (*cmp)(ElemType *, ElemT
 	QuickSort(A, low, l-1, cmp);
 	QuickSort(A, h, high, cmp);
 }
+#endif

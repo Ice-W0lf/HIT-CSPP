@@ -39,7 +39,7 @@ void printHeader(bool withSum)
 void printStu(Student *stu, int i, bool withSum)
 {
 	Student *this = stu + i;
-	printf("%-16lu", this->id);
+	printf("%-16ld", this->id);
 	printf("%-12s", this->name);
 	for (int j=0; j < COURSE_NUM; ++j)
 	{

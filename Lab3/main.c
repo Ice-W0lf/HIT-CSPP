@@ -4,7 +4,7 @@
 #include <string.h>
 #include "sort.h"
 
-#define __debug__		// for printing data
+//#define __debug__		// for printing data
 //you must specify an int to indicate the data type to be sorted
 int dataType = STUDENT;
 

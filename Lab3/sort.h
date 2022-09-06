@@ -16,10 +16,10 @@ typedef struct _STU
 
 #define __QuickSortTest__		// for test QuickSort on diffrent shape of data
 
-#ifndef __QuickSortTest__
-typedef STU ElemType;
-#else
+#ifdef __QuickSortTest__
 typedef double ElemType;
+#else
+typedef STU ElemType;
 #endif
 
 void SelectSort(ElemType *A, int n, int (*cmp)(ElemType *, ElemType *));

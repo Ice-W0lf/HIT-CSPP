@@ -15,7 +15,7 @@ int searchByName(Student *stu, int n, char name[MAX_STU_NAME_LEN])
 	return -1;
 }
 
-int searchById(Student *stu, int n, unsigned long id)
+int searchById(Student *stu, int n, int64_t id)
 {
 	for (int i=0; i<n; ++i)
 	{
